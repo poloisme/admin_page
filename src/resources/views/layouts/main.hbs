@@ -10,7 +10,43 @@
 </head>
 <body>
     <div class="app">
-        {{{body}}}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col col-3	col-sm-3	col-md-3	col-lg-3	col-xl-3	col-xxl-3">
+                <div class="d-flex align-items-center pt-3 pb-3">
+                    <img src="img/icon/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top mr-2">
+                    <h3 class="text-logo">Ei store</h3>
+                </div>
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container-fluid flex-column align-items-start">
+                    <a class="navbar-brand pt-3 pb-3" href="/">
+                        <img src="img/icon/dashboard.png" alt="" width="30" height="24" class="d-inline-block align-text-top mr-2">
+                        Dashboard
+                    </a>
+                    <a class="navbar-brand pt-3 pb-3" href="/customer">
+                        <img src="img/icon/customer.png" alt="" width="30" height="24" class="d-inline-block align-text-top mr-2">
+                        Customer
+                    </a>
+                    <a class="navbar-brand pt-3 pb-3" href="/product">
+                        <img src="img/icon/product.png" alt="" width="30" height="24" class="d-inline-block align-text-top mr-2">
+                        Products
+                    </a>
+                    <a class="navbar-brand pt-3 pb-3" href="/order">
+                        <img src="img/icon/order.png" alt="" width="30" height="24" class="d-inline-block align-text-top mr-2">
+                        Order
+                    </a>
+                    <a class="navbar-brand pt-3 pb-3" href="/chat">
+                        <img src="img/icon/chat.png" alt="" width="30" height="24" class="d-inline-block align-text-top mr-2">
+                        Chat
+                    </a>
+                    </div>
+                </nav>
+                </div>
+                <div class="col col-9	col-sm-9	col-md-9	col-lg-9	col-xl-9	col-xxl-9">
+                    {{{body}}}
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
