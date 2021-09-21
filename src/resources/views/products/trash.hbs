@@ -1,0 +1,134 @@
+<div class="px-2 my-2">
+    <a href="/products">
+        <i class="ti-arrow-left"></i>
+    </a>
+</div>
+<div class="wrapper">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">price</th>
+                    <th scope="col">image</th>
+                    <th scope="col">type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td><img class="img-product" src="/img/product/{{this.image}}" /></td>
+                    <td>{{this.type}}</td>
+                    <td>
+                        <a id="btn-restore" class="btn btn-link btn-circle rounded-circle" data-toggle="modal"
+                            data-target="#confirm-restore-modal">
+                            <input class="d-none" type="text" values="{{this._id}}">
+                            <i class="ti-share-alt"></i>
+                        </a>
+                        <a id="btn-delete" class="btn btn-link btn-circle rounded-circle" data-toggle="modal"
+                            data-target="#confirm-delete-modal">
+                            <input class="d-none" type="text" values="{{this._id}}">
+                            <i class="ti-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        Thùng rác trống
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Form hidden confirm delete-->
+<form id="delete-form" method="POST" action=""></form>
+<form id="restore-form" method="POST" action=""></form>
+
+<!-- Modal -->
+<div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Xác nhận xóa vĩnh viễn dữ liệu này</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                <button id="btn-confirm-delete" type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-restore-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn chắc chắn muốn khôi phục dữ liệu này</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                <button id="btn-confirm-restore" type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let productID;
+    const btnDelete = document.querySelectorAll("[id=btn-delete]");
+    const btnRestore = document.querySelectorAll("[id=btn-restore]");
+    const btnConfirmDelete = document.getElementById("btn-confirm-delete");
+    const btnConfirmRestore = document.getElementById("btn-confirm-restore");
+    const deleteForm = document.forms['delete-form'];
+    const restoreForm = document.forms['restore-form'];
+
+    //get productID of btnDelete
+    btnDelete.forEach((element, index) => {
+        element.onclick = (e) => {
+            e.preventDefault();
+            { { !--console.log(btnDelete[index].children[0].getAttribute('values')) --} }
+            productID = btnDelete[index].children[0].getAttribute('values');
+        };
+    });
+
+    //submit form delete when click confirm delete
+    btnConfirmDelete.onclick = () => {
+        deleteForm.action = `/products/trash/${productID}/force?_method=DELETE`;
+        deleteForm.submit();
+    }
+
+    //get productID of btnRestore
+    btnRestore.forEach((element, index) => {
+        element.onclick = (e) => {
+            e.preventDefault();
+            { { !--console.log(btnRestore[index].children[0].getAttribute('values')) --} }
+            productID = btnRestore[index].children[0].getAttribute('values');
+        };
+    });
+
+    //submit form restore when click confirm restore
+    btnConfirmRestore.onclick = () => {
+        restoreForm.action = `/products/trash/${productID}/restore?_method=PATCH`;
+        restoreForm.submit();
+    }
+</script>
